@@ -29,6 +29,12 @@ module Celluloid
       def to_io
         @socket
       end
+
+      # Pass the Ruby TCPSocket to the given block and replace it with the
+      # return value of the block. (i.e. to create OpenSSL sockets)
+      def wrap_socket
+        @socket = yield(@socket)
+      end
     end
   end
 end
